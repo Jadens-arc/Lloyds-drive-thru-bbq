@@ -14,7 +14,7 @@
     />
     <!-- styling -->
     <link rel="stylesheet" href="styles.css" />
-
+    <link rel="stylesheet" href="menu.css" />
     <!-- fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -40,6 +40,57 @@
       </ul>
     </nav>
 
-    <main></main>
+    <main id="menu-container" class="menu-container"></main>
+
+    <script defer>
+      const menuContainer = document.getElementById("menu-container");
+
+      function addItem(name, image) {
+        let newItem = document.createElement("div");
+        newItem.classList.add("menu-item");
+
+        let itemImg = document.createElement("img");
+        itemImg.src = image;
+        newItem.appendChild(itemImg);
+
+        let itemText = document.createElement("p");
+        itemText.innerText = name;
+        newItem.appendChild(itemText);
+
+        menuContainer.appendChild(newItem);
+      }
+
+      async function getItems() {
+        let r = new XMLHttpRequest();
+        let promise = new Promise((resolve) => {
+          r.open("GET", "/menu-items.txt");
+          r.send();
+          r.onreadystatechange = () => {
+            if (r.status == 200 && r.readyState == 4) {
+              resolve(r.responseText);
+            }
+          };
+        });
+        return promise;
+      }
+
+      function parseItems(items = "") {
+        items = items.split("~");
+        items = items.map((item) => {
+          return item.split("\n").filter((info) => {
+            return info != "\r" && info != "";
+          });
+        });
+        return items;
+      }
+
+      (async function loadItems() {
+        let items = await getItems();
+        items = parseItems(items);
+        items.forEach((item) => {
+          addItem(item[0], item[1]);
+        });
+      })();
+    </script>
   </body>
 </html>

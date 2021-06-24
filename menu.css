@@ -1,0 +1,27 @@
+body {
+  overflow-x: hidden;
+}
+
+.menu-container {
+  width: 60%;
+  margin: 0 auto;
+}
+
+.menu-item {
+  padding: 20px;
+  border-bottom: 1px solid red;
+  border-radius: 0;
+  margin-bottom: 20px ;
+}
+
+.menu-item img {
+  width: 40vw;
+  height: 30vw;
+  object-fit: cover;
+}
+
+@media screen and (max-width: 800px) {
+  .menu-container {
+    width: 90%;
+  }
+}
