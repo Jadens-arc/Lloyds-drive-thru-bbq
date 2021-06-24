@@ -10,6 +10,16 @@ body {
   width: 100vw;
 }
 
+body::-webkit-scrollbar {
+  background-image: linear-gradient(90deg, black 40%, red 5%, black 60%);
+}
+
+body::-webkit-scrollbar-thumb {
+  background-color: black;
+  border: 1px solid red;
+  border-radius: 70px;
+}
+
 .top-nav {
   padding: 20px;
   display: flex;
@@ -78,7 +88,7 @@ main hr {
 
 @keyframes fadeSlideUp {
   0% {
-    transform: translateY(25%);
+    transform: translateY(25vh);
     opacity: 0;
   }
 
